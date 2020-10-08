@@ -47,5 +47,4 @@ app.post('/fibonacci', (request, response) => {
   
   return response.send({ mensagem: fibonacci })
 })
-
 app.listen(3000, () => console.log('rodando na porta 3000'));
