@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    input {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <p class="mensagem"></p>
+    <input class="valor" min="1" max="20" type="number" name="valor" placeholder="Insira um número até 20" />
+    <button class="enviaNumero">Login</button>
+  </form>
+  <script>
+    const enviaNumero = document.querySelector('.enviaNumero');
+
+    enviaNumero.addEventListener('click', function (event) {
+      event.preventDefault();
+
+      const valor = document.querySelector('.valor').value;
+      const mensagem = document.querySelector('.mensagem');
+
+      fetch('http://localhost:3000/fibonacci', { method: 'POST', headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body: JSON.stringify({ valor: valor })}).then(function (json) {
+        json.json().then(function(response) {
+          if (response.mensagem) {
+            mensagem.innerHTML = response.mensagem;
+          }
+        });
+      });
+    })
+  </script>
+</body>
+</html>
